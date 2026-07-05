@@ -74,6 +74,14 @@ h1{
     background:#fafafa;
    display: none;
 }
+.medi-img{
+    width:300px;
+    height:180px;
+    object-fit:cover;
+    display:block;
+    border-radius: 10px;
+    margin:0 auto 20px;
+}
 </style>
 
 </head>
@@ -86,7 +94,6 @@ h1{
     <a href="login.html">Login</a>
     <a href="contact.html">Contact us</a>
 </nav>
-
 <h1>Search Here</h1>
 
 <div class="search">
@@ -103,12 +110,14 @@ const medicines = [
 
 {
     name:"Paracetamol",
+    description: "Paracetamol is an analgestic agent used to treat fever and mild to moderate pain. It reduce pain and fever. It doesn't treat the cause of your pain, it just eases the feeling of pain.",
+    image:"paracetamol.png",
     price:"Rs.25",
     expiry:"12/2027",
     manufacturer:"ABC Pharma",
     dosage:"500 mg",
     uses:"Used for fever and pain relief.",
-    sideEffects:"Nausea, dizziness"
+    sideEffect:"Nausea, dizziness"
 },
 
 {
@@ -133,7 +142,7 @@ const medicines = [
 
 {
     name:"Cetirizine",
-    price:"Rs.35",
+       price:"Rs.35",
     expiry:"03/2028",
     manufacturer:"Cipla",
     dosage:"10 mg",
@@ -184,6 +193,7 @@ function medsearch(){
        let details = document.getElementById("details");
           details.innerHTML="";
          details.style.display="none";
+         return ;
     }
 
     let output="";
@@ -219,19 +229,23 @@ function selectMedicine(name){
     details.style.display = "block";
 
     details.innerHTML = `
-        <h2>${medicine.name}</h2>
+        <h2>${ medicine.name}</h2>
 
-        <p><b>Price:</b> ${medicine.price}</p>
+        <p> ${medicine.description}</p>
 
-        <p><b>Expiry Date:</b> ${medicine.expiry}</p>
+        <img src="${medicine.image}" class="medi-img">
 
-        <p><b>Manufacturer:</b> ${medicine.manufacturer}</p>
+        <p><b>Price:</b> ${ medicine.price}</p>
 
-        <p><b>Dosage:</b> ${medicine.dosage}</p>
+        <p><b>Expiry Date:</b> ${ medicine.expiry}</p>
 
-        <p><b>Uses:</b> ${medicine.uses}</p>
+        <p><b>Manufacturer:</b> ${ medicine.manufacturer}</p>
 
-        <p><b>Side Effects:</b> ${medicine.sideEffects}</p>
+        <p><b>Dosage:</b> ${ medicine.dosage}</p>
+
+        <p><b>Uses:</b> ${ medicine.uses}</p>
+
+        <p><b>Side Effects:</b> ${ medicine.sideEffects}</p>
     `;
 }
 
