@@ -1,74 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-    body{
-        padding: 0px;;
-    }
-     nav{
-        display: flex;
-        margin: 30px;
-        padding-left: 67%;
-        gap: 30px;
-        background-color: #1E3A8A;
-     }
-     
-     a:hover{
-        background-color: #3B82F6;
-     }
-     a{
-        display: block;
-       font-size: 25px;
-       text-decoration: none;
-       padding: 5px; 5px;
-       color: white;
-     }
-     h1{
-        text-align: center;
-        font-size: 50px;
-     }
-     .search{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-     }
-     #input{
-        width: 600px;
-        height: 70px;
-        border-radius: 50px;
-        font-size: 20px;
-        padding-left: 10px;
-     }
-     button{
-        margin: 70px;
-        margin-left: 47%;
-        height: 50px;
-        width: 80px;
-        font-size: 20px;
-        background-color:#10B981;
-        color: white;
-     }
-     button:hover{
-        background-color: #059669;;
-     }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicine Search</title>
+
+<style>
+body{
+    padding:0;
+}
+
+nav{
+    display:flex;
+    margin:30px;
+    padding-left:67%;
+    gap:30px;
+    background-color:#1E3A8A;
+}
+
+a{
+    display:block;
+    font-size:25px;
+    text-decoration:none;
+    color:white;
+    padding:5px;
+}
+
+a:hover{
+    background:#3B82F6;
+}
+
+h1{
+    text-align:center;
+    font-size:50px;
+}
+
+.search{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#input{
+    width:600px;
+    height:70px;
+    border-radius:50px;
+    font-size:20px;
+    padding-left:10px;
+}
+
+#result{
+    width:600px;
+    margin:auto;
+}
+
+.item{
+    padding:15px;
+    border:1px solid #ccc;
+    cursor:pointer;
+    background:white;
+}
+
+.item:hover{
+    background:#f0f0f0;
+}
+
+#details{
+    width:600px;
+    margin:30px auto;
+    border:1px solid #ccc;
+    border-radius:10px;
+    padding:20px;
+    background:#fafafa;
+   display: none;
+}
+</style>
+
 </head>
+
 <body>
-    <nav>
-        <a href="home.html">Home</a>
-        <a href="search.html">Explore</a>
-        <a href="login.html">Login</a>
-        <a href="contact.html">Contact us</a>
-    </nav>
-    <h1> Search Here </h1>
-    <div class="search">
-        <input type="text" id="input" placeholder="medicine name.........">
-    </div>
-     <button name="button" id="btn"> Enter</button>
-   
+
+<nav>
+    <a href="home.html">Home</a>
+    <a href="search.html">Explore</a>
+    <a href="login.html">Login</a>
+    <a href="contact.html">Contact us</a>
+</nav>
+
+<h1>Search Here</h1>
+
+<div class="search">
+    <input type="text" id="input" placeholder="Medicine name..." onkeyup="medsearch()">
+</div>
+
+<div id="result"></div>
+
+<div id="details"></div>
+
+<script>
+
+const medicines = [
+
+{
+    name:"Paracetamol",
+    price:"Rs.25",
+    expiry:"12/2027",
+    manufacturer:"ABC Pharma",
+    dosage:"500 mg",
+    uses:"Used for fever and pain relief.",
+    sideEffects:"Nausea, dizziness"
+},
+
+{
+    name:"Ibuprofen",
+    price:"Rs.40",
+    expiry:"10/2028",
+    manufacturer:"XYZ Pharma",
+    dosage:"400 mg",
+    uses:"Used to reduce pain and inflammation.",
+    sideEffects:"Stomach upset"
+},
+
+{
+    name:"Amoxicillin",
+    price:"Rs.60",
+    expiry:"08/2028",
+    manufacturer:"ABC Pharma",
+    dosage:"250 mg",
+    uses:"Treats bacterial infections.",
+    sideEffects:"Diarrhea, nausea"
+},
+
+{
+    name:"Cetirizine",
+    price:"Rs.35",
+    expiry:"03/2028",
+    manufacturer:"Cipla",
+    dosage:"10 mg",
+    uses:"Relieves allergy symptoms.",
+    sideEffects:"Sleepiness"
+},
+
+{
+    name:"Aspirin",
+    price:"Rs.30",
+    expiry:"11/2027",
+    manufacturer:"Bayer",
+    dosage:"75 mg",
+    uses:"Pain relief and blood thinner.",
+    sideEffects:"Stomach irritation"
+},
+
+{
+    name:"Omeprazole",
+    price:"Rs.90",
+    expiry:"05/2029",
+    manufacturer:"Sun Pharma",
+    dosage:"20 mg",
+    uses:"Treats acidity and ulcers.",
+    sideEffects:"Headache"
+},
+
+{
+    name:"Metformin",
+    price:"Rs.80",
+    expiry:"02/2029",
+    manufacturer:"Novartis",
+    dosage:"500 mg",
+    uses:"Controls diabetes.",
+    sideEffects:"Nausea"
+}
+
+];
+
+function medsearch(){
+
+    let input=document.getElementById("input").value.toLowerCase();
+
+    let result=document.getElementById("result");
+
+    if(input==""){
+        result.innerHTML="";
+       let details = document.getElementById("details");
+          details.innerHTML="";
+         details.style.display="none";
+    }
+
+    let output="";
+
+    medicines.forEach(function(medicine){
+
+        if(medicine.name.toLowerCase().includes(input)){
+
+            output+=`
+            <div class="item" onclick="selectMedicine('${medicine.name}')">
+                ${medicine.name}
+            </div>
+            `;
+        }
+
+    });
+
+    result.innerHTML=output;
+
+}
+function selectMedicine(name){
+
+    let medicine = medicines.find(function(item){
+        return item.name === name;
+    });
+
+    document.getElementById("input").value = medicine.name;
+
+    document.getElementById("result").innerHTML = "";
+
+    let details = document.getElementById("details");
+
+    details.style.display = "block";
+
+    details.innerHTML = `
+        <h2>${medicine.name}</h2>
+
+        <p><b>Price:</b> ${medicine.price}</p>
+
+        <p><b>Expiry Date:</b> ${medicine.expiry}</p>
+
+        <p><b>Manufacturer:</b> ${medicine.manufacturer}</p>
+
+        <p><b>Dosage:</b> ${medicine.dosage}</p>
+
+        <p><b>Uses:</b> ${medicine.uses}</p>
+
+        <p><b>Side Effects:</b> ${medicine.sideEffects}</p>
+    `;
+}
+
+</script>
+
 </body>
 </html>
