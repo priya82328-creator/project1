@@ -240,6 +240,7 @@ const medicines = [
     expiry:"12/2027",
     manufacturer:"ABC Pharma",
     dosage:"500 mg",
+    stock:"Available",
     uses:"Used for fever and pain relief.",
     sideEffect:"Nausea, dizziness",
 },
@@ -252,6 +253,7 @@ const medicines = [
     expiry:"10/2028",
     manufacturer:"XYZ Pharma",
     dosage:"400 mg",
+    stock:"Not available",
     uses:"Used to reduce pain and inflammation.",
     sideEffects:"Stomach upset"
 },
@@ -264,6 +266,7 @@ const medicines = [
     expiry:"08/2028",
     manufacturer:"ABC Pharma",
     dosage:"250 mg",
+    stock:"Available",
     uses:"Treats bacterial infections.",
     sideEffects:"Diarrhea, nausea"
 },
@@ -276,6 +279,7 @@ const medicines = [
     expiry:"03/2028",
     manufacturer:"Cipla",
     dosage:"10 mg",
+    stock:"Not available",
     uses:"Relieves allergy symptoms.",
     sideEffects:"Sleepiness"
 },
@@ -288,6 +292,7 @@ const medicines = [
     expiry:"11/2027",
     manufacturer:"Bayer",
     dosage:"75 mg",
+    stock:"Available",
     uses:"Pain relief and blood thinner.",
     sideEffects:"Stomach irritation"
 },
@@ -300,6 +305,7 @@ const medicines = [
     expiry:"05/2029",
     manufacturer:"Sun Pharma",
     dosage:"20 mg",
+    stock:"Not available",
     uses:"Treats acidity and ulcers.",
     sideEffects:"Headache"
 },
@@ -312,6 +318,7 @@ const medicines = [
     expiry:"02/2029",
     manufacturer:"Novartis",
     dosage:"500 mg",
+    stock:"Available",
     uses:"Controls diabetes.",
     sideEffects:"Nausea"
 }
@@ -376,6 +383,8 @@ function selectMedicine(name){
         <p><b>Expiry Date:</b> ${ medicine.expiry}</p>
 
         <p><b>Manufacturer:</b> ${ medicine.manufacturer}</p>
+
+        <p><b> Stock:</b> ${medicine.stock}</p>
 
         <p><b>Dosage:</b> ${ medicine.dosage}</p>
 
