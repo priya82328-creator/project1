@@ -78,8 +78,7 @@ h1 span{
     border:none;
     outline:none;
     border-radius:40px;
-    background:white;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    background:white;box-shadow:0 10px 30px rgba(0,0,0,.15); 
     transition:.3s;
 }
 
@@ -206,6 +205,23 @@ h1 span{
         height:200px;
     }
 }
+#btn{
+    display:block;
+    margin:25px auto 0;
+    padding:12px 35px;
+    background:#2563EB;
+    color:white;
+    border:none;
+    border-radius:30px;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#btn:hover{
+    background:#1E3A8A;
+    transform:scale(1.05);
+}
 </style>
 
 </head>
@@ -226,9 +242,14 @@ h1 span{
 
 <div id="result"></div>
 
-<div id="details"></div>
+<div id="details">
+   <button  id="btn" onclick="goToPage()">Order</button>
+</div>
 
 <script>
+    function goToPage(){
+        window.location.href="login.html";
+    }
 
 const medicines = [
 
@@ -391,6 +412,8 @@ function selectMedicine(name){
         <p><b>Uses:</b> ${ medicine.uses}</p>
 
         <p><b>Side Effects:</b> ${ medicine.sideEffects}</p>
+
+        <button id="btn" onclick="goToPage()">Order Now</button>
     `;
 }
 
