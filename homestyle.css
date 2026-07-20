@@ -1,123 +1,314 @@
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
 }
 
 body{
-    background:linear-gradient(135deg,#eaf6ff,#d8f3ff,#ffffff);
-    min-height:100vh;
+background:#f4f8ff;
 }
 
 /* Navigation */
 
 nav{
-    display:flex;
-    justify-content:flex-end;
-    align-items:center;
-    gap:20px;
-    padding:20px 50px;
-    background:linear-gradient(90deg,#1E3A8A,#2563EB);
-    box-shadow:0 5px 15px rgba(0,0,0,0.15);
-    position:sticky;
-    top:0;
-    z-index:100;
+
+background:#2f5bd3;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 70px;
+
 }
 
-nav a{
-    color:white;
-    text-decoration:none;
-    font-size:20px;
-    font-weight:bold;
-    padding:10px 18px;
-    border-radius:30px;
-    transition:.3s;
+.logo{
+
+color:white;
+font-size:28px;
+font-weight:bold;
+
 }
 
-nav a:hover{
-    background:white;
-    color:#2563EB;
-    transform:translateY(-3px);
+.menu a{
+
+color:white;
+text-decoration:none;
+margin-left:35px;
+font-size:18px;
+font-weight:600;
+transition:.3s;
+
+}
+
+.menu a:hover{
+
+color:#dce7ff;
+
 }
 
 /* Hero */
 
-.hero{
+header{
 
-    width:90%;
-    margin:auto;
+width:90%;
+margin:70px auto;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    min-height:85vh;
+display:flex;
+align-items:center;
+justify-content:space-between;
 
 }
 
 .hero-text{
 
-    width:50%;
+width:50%;
 
 }
 
 .hero-text h1{
 
-    font-size:65px;
-    color:#163d8f;
-    margin-bottom:20px;
+font-size:58px;
+color:#2447a5;
+margin-bottom:20px;
 
 }
 
 .hero-text p{
 
-    font-size:23px;
-    line-height:38px;
-    color:#555;
-    margin-bottom:35px;
+font-size:19px;
+line-height:1.8;
+color:#555;
+margin-bottom:35px;
 
 }
-
-.btn{
-
-    display:inline-block;
-
-    padding:18px 45px;
-
-    background:#2954ff;
-
-    color:white;
-
-    text-decoration:none;
-
-    border-radius:40px;
-
-    font-size:22px;
-
-    transition:.3s;
-
-}
-
-.btn:hover{
-
-    background:#173db2;
-    transform:translateY(-5px);
-
-}
-
-/* Image */
 
 .hero-image{
 
-    width: 40%;
-    text-align:center;
+width:45%;
 
 }
 
 .hero-image img{
 
-    width:100%;
-    max-width:950px;
+width:100%;
+
+}
+
+.btn{
+
+background:#2f5bd3;
+color:white;
+padding:15px 35px;
+border-radius:35px;
+text-decoration:none;
+font-size:18px;
+
+}
+
+.btn:hover{
+
+background:#1f45b8;
+
+}
+
+/* Services */
+
+.services{
+
+padding:70px 10%;
+
+}
+
+.services h2{
+
+text-align:center;
+font-size:38px;
+color:#2447a5;
+margin-bottom:45px;
+
+}
+
+.service-box{
+
+display:flex;
+gap:30px;
+
+}
+
+.card{
+
+background:white;
+padding:35px;
+border-radius:15px;
+flex:1;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+text-align:center;
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.card h3{
+
+color:#2447a5;
+margin-bottom:20px;
+
+}
+
+.card p{
+
+color:#666;
+line-height:1.7;
+
+}
+
+/* About */
+
+.about{
+
+padding:80px 10%;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+.about-image{
+
+width:45%;
+
+}
+
+.about-image img{
+
+width:100%;
+
+}
+
+.about-text{
+
+width:50%;
+
+}
+
+.about-text h2{
+
+font-size:40px;
+color:#2447a5;
+margin-bottom:20px;
+
+}
+
+.about-text p{
+
+line-height:1.8;
+margin-bottom:20px;
+color:#555;
+
+}
+
+.about-text ul{
+
+line-height:2;
+list-style:none;
+
+}
+
+/* CTA */
+
+.cta{
+
+background:#2f5bd3;
+padding:70px;
+text-align:center;
+color:white;
+
+}
+
+.cta h2{
+
+font-size:40px;
+margin-bottom:15px;
+
+}
+
+.cta p{
+
+margin-bottom:30px;
+font-size:18px;
+
+}
+
+/* Footer */
+
+footer{
+
+background:#183a97;
+color:white;
+
+}
+
+.footer{
+
+width:90%;
+margin:auto;
+padding:60px 0;
+
+display:flex;
+justify-content:space-between;
+
+}
+
+.footer div{
+
+width:30%;
+
+}
+
+.footer h3{
+
+margin-bottom:20px;
+
+}
+
+.footer p{
+
+line-height:1.8;
+
+}
+
+.footer a{
+
+display:block;
+color:white;
+text-decoration:none;
+margin-bottom:10px;
+
+}
+
+.footer a:hover{
+
+color:#dce7ff;
+
+}
+
+hr{
+
+width:90%;
+margin:auto;
+border:.5px solid rgba(255,255,255,.2);
+
+}
+
+.copy{
+
+text-align:center;
+padding:20px;
 
 }
