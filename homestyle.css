@@ -1,49 +1,44 @@
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
-background:#f4f8ff;
+    background:linear-gradient(135deg,#eaf6ff,#d8f3ff,#ffffff);
+    min-height:100vh;
 }
 
 /* Navigation */
 
 nav{
-
-background:#2f5bd3;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 70px;
-
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:20px;
+    padding:20px 50px;
+    background:linear-gradient(90deg,#1E3A8A,#2563EB);
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-.logo{
-
-color:white;
-font-size:28px;
-font-weight:bold;
-
+nav a{
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:bold;
+    padding:10px 18px;
+    border-radius:30px;
+    transition:.3s;
 }
 
-.menu a{
-
-color:white;
-text-decoration:none;
-margin-left:35px;
-font-size:18px;
-font-weight:600;
-transition:.3s;
-
-}
-
-.menu a:hover{
-
-color:#dce7ff;
-
+nav a:hover{
+    background:white;
+    color:#2563EB;
+    transform:translateY(-3px);
 }
 
 /* Hero */
