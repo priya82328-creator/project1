@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Medicine Search</title>
+
+<link rel="stylesheet" href="style.css">
+
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -26,7 +32,7 @@ nav{
     gap:20px;
     padding:20px 50px;
     background:linear-gradient(90deg,#1E3A8A,#2563EB);
-    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
     position:sticky;
     top:0;
     z-index:100;
@@ -48,21 +54,12 @@ nav a:hover{
     transform:translateY(-3px);
 }
 
-/* Heading */
-
 h1{
     text-align:center;
     font-size:55px;
     margin-top:60px;
     color:#1E3A8A;
-    letter-spacing:1px;
 }
-
-h1 span{
-    color:#0EA5E9;
-}
-
-/* Search Area */
 
 .search{
     display:flex;
@@ -78,16 +75,9 @@ h1 span{
     border:none;
     outline:none;
     border-radius:40px;
-    background:white;box-shadow:0 10px 30px rgba(0,0,0,.15); 
-    transition:.3s;
+    background:white;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
-
-#input:focus{
-    transform:scale(1.02);
-    box-shadow:0 10px 35px rgba(37,99,235,.35);
-}
-
-/* Search Suggestions */
 
 #result{
     width:700px;
@@ -110,44 +100,15 @@ h1 span{
     padding-left:30px;
 }
 
-/* Details Card */
-
 #details{
     width:750px;
     margin:40px auto;
     padding:30px;
     border-radius:20px;
-    background:rgba(255,255,255,0.95);
+    background:white;
     box-shadow:0 15px 35px rgba(0,0,0,.15);
     display:none;
-    animation:fade .4s ease;
 }
-
-@keyframes fade{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-#details h2{
-    color:#1E3A8A;
-    margin-bottom:20px;
-    text-align:center;
-}
-
-#details p{
-    font-size:18px;
-    line-height:1.8;
-    color:#444;
-    margin-bottom:12px;
-}
-
-/* Medicine Image */
 
 .medi-img{
     width:350px;
@@ -156,72 +117,8 @@ h1 span{
     display:block;
     margin:0 auto 25px;
     border-radius:15px;
-    box-shadow:0 8px 20px rgba(0,0,0,.2);
-    transition:.4s;
 }
 
-.medi-img:hover{
-    transform:scale(1.05);
-}
-
-/* Scrollbar */
-
-::-webkit-scrollbar{
-    width:10px;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#2563EB;
-    border-radius:20px;
-}
-
-::-webkit-scrollbar-track{
-    background:#eee;
-}
-
-/* Responsive */
-
-@media(max-width:768px){
-
-    nav{
-        justify-content:center;
-        flex-wrap:wrap;
-        padding:20px;
-    }
-
-    h1{
-        font-size:38px;
-        padding:0 15px;
-    }
-
-    #input,
-    #result,
-    #details{
-        width:90%;
-    }
-
-    .medi-img{
-        width:100%;
-        height:200px;
-    }
-}
-#btn{
-    display:block;
-    margin:25px auto 0;
-    padding:12px 35px;
-    background:#2563EB;
-    color:white;
-    border:none;
-    border-radius:30px;
-    font-size:18px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-#btn:hover{
-    background:#1E3A8A;
-    transform:scale(1.05);
-}
 .btn-group{
     display:flex;
     justify-content:center;
@@ -235,34 +132,58 @@ h1 span{
     color:white;
     border:none;
     border-radius:30px;
-    font-size:18px;
     cursor:pointer;
+    font-size:18px;
     transition:.3s;
 }
+
 .btn:hover{
     background:#1E3A8A;
-    transform:scale(1.05);
 }
+
 #toast{
     position:fixed;
-    top:30px;
-    right:30px;
+    top:25px;
+    right:25px;
     background:#16a34a;
     color:white;
     padding:15px 25px;
     border-radius:10px;
-    font-size:17px;
-    box-shadow:0 8px 20px rgba(0,0,0,.2);
     opacity:0;
     visibility:hidden;
     transition:.4s;
-    z-index:1000;
 }
 
 #toast.show{
     opacity:1;
     visibility:visible;
 }
+
+@media(max-width:768px){
+
+nav{
+justify-content:center;
+flex-wrap:wrap;
+padding:20px;
+}
+
+h1{
+font-size:38px;
+}
+
+#input,
+#result,
+#details{
+width:90%;
+}
+
+.medi-img{
+width:100%;
+height:200px;
+}
+
+}
+
 </style>
 
 </head>
@@ -270,76 +191,77 @@ h1 span{
 <body>
 
 <nav>
-    <a href="home.html">Home</a>
-    <a href="search.html">Explore</a>
-    <a href="login.html">Login</a>
-    <a href="contact.html">Contact us</a>
+
+<a href="home.html">Home</a>
+
+<a href="search.html">Explore</a>
+
+<a href="login.html" id="loginLink">Login</a>
+
+<a href="cart.html" id="cartLink" style="display:none;">
+🛒 Cart (<span id="cartCount">0</span>)
+</a>
+
+<a href="contact.html">Contact Us</a>
+
+<a href="#" id="logoutLink" style="display:none;">Logout</a>
+
 </nav>
+
 <h1>Search Here</h1>
 
 <div class="search">
-    <input type="text" id="input" placeholder="Medicine name..." onkeyup="medsearch()">
+
+<input
+type="text"
+id="input"
+placeholder="Medicine name..."
+onkeyup="medsearch()">
+
 </div>
 
-<div id="result">
-</div>
+<div id="result"></div>
 
-<div id="details">
-</div>
+<div id="details"></div>
 
 <div id="toast">
-     Successfully added to cart.
+Successfully added to cart.
 </div>
 
-
 <script>
-    function goToPage(){
-        window.location.href="login.html";
-    }
-    function message(){
-
-    let toast = document.getElementById("toast");
-
-    toast.classList.add("show");
-
-    setTimeout(function(){
-        toast.classList.remove("show");
-    },2000);
-
-}
 
 const medicines = [
 {
     name:"Paracetamol",
-    description: "Paracetamol is an analgestic agent used to treat fever and mild to moderate pain. It reduce pain and fever. It doesn't treat the cause of your pain, it just eases the feeling of pain.",
+    description:"Paracetamol is an analgesic agent used to treat fever and mild to moderate pain. It reduces pain and fever.",
     image:"paracetamol.png",
-    price:"Rs.25",
+    price:25,
     expiry:"12/2027",
     manufacturer:"ABC Pharma",
     dosage:"500 mg",
     stock:"Available",
     uses:"Used for fever and pain relief.",
-    sideEffect:"Nausea, dizziness",
+    sideEffects:"Nausea, dizziness"
 },
 
 {
     name:"Ibuprofen",
-    description:"Ibuprofen is a nosteroidal anti-inflammatory drug that is used to relieve pain, fever and inflammation. THis includes painful menstrual periods, migraines and rheumatoid arthritis.",
+    description:"Ibuprofen is a nonsteroidal anti-inflammatory drug used to relieve pain, fever and inflammation.",
     image:"iburo.png",
-    price:"Rs.40",
+    price:40,
     expiry:"10/2028",
     manufacturer:"XYZ Pharma",
     dosage:"400 mg",
-    stock:"Not available",
-    uses:"Used to reduce pain and inflammation.",
+    stock:"Available",
+    uses:"Reduces pain and inflammation.",
     sideEffects:"Stomach upset"
 },
 
 {
     name:"Amoxicillin",
-    description: "Amoxicillin is used to treat bacterial infections such as middle ear infection, strep throat, pneumonia , skin infections, odontogenic infections and urninary tract infections. It is taken orally or less commonly.",
+    description:"Amoxicillin is used to treat bacterial infections.",
     image:"amo.png",
-    price:"Rs.60",
+    price:60,
     expiry:"08/2028",
     manufacturer:"ABC Pharma",
     dosage:"250 mg",
@@ -350,22 +272,22 @@ const medicines = [
 
 {
     name:"Cetirizine",
-    description: "Cetirizine is a second generation antihistamine used to treat allerfic rhinitis , dermatitis , urticaria and runny nose. It include effects like sleepiness , dry mouth , headache and abdominal pain. ",
+    description:"Cetirizine is an antihistamine used to treat allergies.",
     image:"ctz.png",
-    price:"Rs.35",
+    price:35,
     expiry:"03/2028",
     manufacturer:"Cipla",
     dosage:"10 mg",
-    stock:"Not available",
+    stock:"Available",
     uses:"Relieves allergy symptoms.",
     sideEffects:"Sleepiness"
 },
 
 {
     name:"Aspirin",
-    description:"Aspirin is a nonsteroidal anti-inflammatory drug used to reduce pain, fever and inflammation. It is used to treat inflammatory conditions including Kawasaki disease, pericarditis and rheumatic fever. ",
+    description:"Aspirin helps reduce pain, fever and inflammation.",
     image:"asp.png",
-    price:"Rs.30",
+    price:30,
     expiry:"11/2027",
     manufacturer:"Bayer",
     dosage:"75 mg",
@@ -376,22 +298,22 @@ const medicines = [
 
 {
     name:"Omeprazole",
-    description:"Omeprazole is a medicine that reduces the amount of acid in your stomach. It is used to treat conditions such as heartbun. It treat symptoms like stmach ulcerus, gastro-oesophageal reflux disease, discomfort from severe reflux in children.",
+    description:"Omeprazole reduces stomach acid and treats ulcers.",
     image:"ome.png",
-    price:"Rs.90",
+    price:90,
     expiry:"05/2029",
     manufacturer:"Sun Pharma",
     dosage:"20 mg",
-    stock:"Not available",
-    uses:"Treats acidity and ulcers.",
+    stock:"Available",
+    uses:"Treats acidity.",
     sideEffects:"Headache"
 },
 
 {
     name:"Metformin",
-    description:"Metformin is used to treat high blood sugar levels that are caused by a type of diabetes mellitus or sugar diabetes called type 2 diabetes. It will help to lower blood sugar when it is too high and help restore the way you use food to make energy. ",
+    description:"Metformin helps control blood sugar levels.",
     image:"met.png",
-    price:"Rs.80",
+    price:80,
     expiry:"02/2029",
     manufacturer:"Novartis",
     dosage:"500 mg",
@@ -404,76 +326,218 @@ const medicines = [
 
 function medsearch(){
 
-    let input=document.getElementById("input").value.toLowerCase();
+let input=document.getElementById("input").value.toLowerCase();
 
-    let result=document.getElementById("result");
+let result=document.getElementById("result");
 
-    if(input==""){
-        result.innerHTML="";
-       let details = document.getElementById("details");
-          details.innerHTML="";
-         details.style.display="none";
-         return ;
-    }
+let details=document.getElementById("details");
 
-    let output="";
+if(input===""){
 
-    medicines.forEach(function(medicine){
-
-        if(medicine.name.toLowerCase().includes(input)){
-
-            output+=`
-            <div class="item" onclick="selectMedicine('${medicine.name}')">
-                ${medicine.name}
-            </div>
-            `;
-        }
-
-    });
-
-    result.innerHTML=output;
+result.innerHTML="";
+details.style.display="none";
+return;
 
 }
+
+let output="";
+
+medicines.forEach(function(medicine){
+
+if(medicine.name.toLowerCase().includes(input)){
+
+output+=`
+<div class="item" onclick="selectMedicine('${medicine.name}')">
+${medicine.name}
+</div>
+`;
+
+}
+
+});
+
+result.innerHTML=output;
+
+}
+
 function selectMedicine(name){
 
-    let medicine = medicines.find(function(item){
-        return item.name === name;
-    });
+let medicine=medicines.find(function(item){
 
-    document.getElementById("input").value = medicine.name;
+return item.name===name;
 
-    document.getElementById("result").innerHTML = "";
+});
 
-    let details = document.getElementById("details");
+document.getElementById("result").innerHTML="";
 
-    details.style.display = "block";
+let details=document.getElementById("details");
 
-    details.innerHTML = `
-        <h2>${ medicine.name}</h2>
+details.style.display="block";
 
-        <p> ${medicine.description}</p>
+details.innerHTML=`
 
-        <img src="${medicine.image}" class="medi-img">
+<h2>${medicine.name}</h2>
 
-        <p><b>Price:</b> ${ medicine.price}</p>
+<img src="${medicine.image}" class="medi-img">
 
-        <p><b>Expiry Date:</b> ${ medicine.expiry}</p>
+<p><b>Description:</b> ${medicine.description}</p>
 
-        <p><b>Manufacturer:</b> ${ medicine.manufacturer}</p>
+<p><b>Price:</b> Rs.${medicine.price}</p>
 
-        <p><b> Stock:</b> ${medicine.stock}</p>
+<p><b>Expiry:</b> ${medicine.expiry}</p>
 
-        <p><b>Dosage:</b> ${ medicine.dosage}</p>
+<p><b>Manufacturer:</b> ${medicine.manufacturer}</p>
 
-        <p><b>Uses:</b> ${ medicine.uses}</p>
+<p><b>Dosage:</b> ${medicine.dosage}</p>
 
-        <p><b>Side Effects:</b> ${ medicine.sideEffects}</p>
-        <div class="btn-group">
-                <button class="btn" onclick="goToPage()">Order Now</button>
-                <button class="btn" onclick="message()">Add To Cart</button>
-        </div>
-    `;
+<p><b>Stock:</b> ${medicine.stock}</p>
+
+<p><b>Uses:</b> ${medicine.uses}</p>
+
+<p><b>Side Effects:</b> ${medicine.sideEffects}</p>
+
+<div class="btn-group">
+
+<button class="btn" onclick="orderNow()">
+Order Now
+</button>
+
+<button class="btn" onclick="addToCart('${medicine.name}',${medicine.price})">
+Add To Cart
+</button>
+
+</div>
+
+`;
+
 }
+function orderNow(){
+
+const currentUser=JSON.parse(localStorage.getItem("currentUser"));
+
+if(!currentUser){
+
+alert("Please login first.");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+window.location.href="cart.html";
+
+}
+
+function addToCart(name,price){
+
+const currentUser=JSON.parse(localStorage.getItem("currentUser"));
+
+if(!currentUser){
+
+alert("Please login first.");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+let cart=JSON.parse(localStorage.getItem("cart")) || [];
+
+let item=cart.find(function(product){
+
+return product.name===name;
+
+});
+
+if(item){
+
+item.quantity++;
+
+}else{
+
+cart.push({
+
+name:name,
+price:price,
+quantity:1
+
+});
+
+}
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+updateCartCount();
+
+showToast();
+
+}
+
+function updateCartCount(){
+
+let cart=JSON.parse(localStorage.getItem("cart")) || [];
+
+let total=0;
+
+cart.forEach(function(item){
+
+total+=item.quantity;
+
+});
+
+document.getElementById("cartCount").innerHTML=total;
+
+}
+
+function showToast(){
+
+let toast=document.getElementById("toast");
+
+toast.classList.add("show");
+
+setTimeout(function(){
+
+toast.classList.remove("show");
+
+},2000);
+
+}
+
+const currentUser=JSON.parse(localStorage.getItem("currentUser"));
+
+if(currentUser){
+
+document.getElementById("loginLink").style.display="none";
+
+document.getElementById("cartLink").style.display="inline-block";
+
+document.getElementById("logoutLink").style.display="inline-block";
+
+updateCartCount();
+
+}else{
+
+document.getElementById("loginLink").style.display="inline-block";
+
+document.getElementById("cartLink").style.display="none";
+
+document.getElementById("logoutLink").style.display="none";
+
+}
+
+document.getElementById("logoutLink").addEventListener("click",function(e){
+
+e.preventDefault();
+
+localStorage.removeItem("currentUser");
+
+alert("Logged out successfully.");
+
+window.location.href="login.html";
+
+});
 
 </script>
 

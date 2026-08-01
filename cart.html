@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Cart - Pharmacy Web System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- Navigation Bar -->
+
+<nav>
+
+    <a href="home.html">
+        Home
+    </a>
+
+
+    <a href="search.html">
+        Explore
+    </a>
+
+
+    <a href="cart.html">
+        🛒 Cart (<span id="cartCount">0</span>)
+    </a>
+
+
+    <a href="contact.html">
+        Contact Us
+    </a>
+
+
+    <a href="#" id="logoutLink">
+        Logout
+    </a>
+
+
+</nav>
+
+
+
+<!-- Cart Section -->
+
+<div class="cart-container">
+
+
+    <h1 style="margin-bottom:25px; color:#1E3A8A;">
+        My Cart
+    </h1>
+
+
+
+    <div id="cartItems">
+
+        <!-- Cart items will be displayed here -->
+
+    </div>
+
+
+
+
+    <h2 class="total">
+
+        Total : Rs.
+        <span id="totalPrice">0</span>
+
+    </h2>
+
+
+
+
+    <br>
+
+
+
+
+    <button 
+        class="login-btn"
+        onclick="window.location.href='search.html'">
+
+        Continue Shopping
+
+    </button>
+
+
+
+</div>
+
+
+
+
+<script src="script.js"></script>
+
+<script src="cart.js"></script>
+
+
+
+</body>
+
+</html>

@@ -9,18 +9,30 @@
 </head>
 <body>
 
-<!-- ================= NAVIGATION ================= -->
 
 <nav>
 
-        <a href="home.html">Home</a>
-        <a href="search.html">Explore</a>
-        <a href="login.html">Login</a>
-        <a href="contact.html">Contact Us</a>
+    <a href="home.html">Home</a>
+
+    <a href="search.html">Explore</a>
+
+    <!-- Before Login -->
+    <a href="login.html" id="loginLink">Login</a>
+
    
+    <a href="cart.html" id="cartLink" style="display:none;">
+        🛒 Cart (<span id="cartCount">0</span>)
+    </a>
+
+    <a href="contact.html">Contact Us</a>
+
+    
+    <a href="#" id="logoutLink" style="display:none;">
+        Logout
+    </a>
+
 </nav>
 
-<!-- ================= HERO ================= -->
 
 <header>
 
@@ -34,7 +46,9 @@
             products—all in one place.
         </p>
 
-        <a href="search.html" class="btn">Search Medicine</a>
+        <a href="search.html" class="btn">
+            Search Medicine
+        </a>
 
     </div>
 
@@ -88,7 +102,7 @@
 
 </section>
 
-<!-- ================= ABOUT ================= -->
+
 
 <section class="about">
 
@@ -110,17 +124,21 @@
         </p>
 
         <ul>
+
             <li>✔ Genuine Products</li>
+
             <li>✔ Secure Ordering</li>
+
             <li>✔ Affordable Prices</li>
+
             <li>✔ Fast Delivery</li>
+
         </ul>
 
     </div>
 
 </section>
 
-<!-- ================= CTA ================= -->
 
 <section class="cta">
 
@@ -129,12 +147,13 @@
     <p>Search thousands of medicines in seconds.</p>
 
     <a href="search.html" class="btn">
+
         Explore Now
+
     </a>
 
 </section>
 
-<!-- ================= FOOTER ================= -->
 
 <footer>
 
@@ -145,8 +164,10 @@
 <h3>Online Pharmacy</h3>
 
 <p>
+
 Providing trusted medicines and healthcare
 products with quality service.
+
 </p>
 
 </div>
@@ -156,8 +177,9 @@ products with quality service.
 <h3>Quick Links</h3>
 
 <a href="home.html">Home</a>
+
 <a href="search.html">Explore</a>
-<a href="login.html">Login</a>
+
 <a href="contact.html">Contact Us</a>
 
 </div>
@@ -167,7 +189,9 @@ products with quality service.
 <h3>Contact</h3>
 
 <p>Kathmandu, Nepal</p>
+
 <p>+977 98XXXXXXXX</p>
+
 <p>pharmacy@gmail.com</p>
 
 </div>
@@ -177,10 +201,18 @@ products with quality service.
 <hr>
 
 <p class="copy">
+
 © 2026 Online Pharmacy. All Rights Reserved.
+
 </p>
 
 </footer>
+
+<!-- JavaScript -->
+
+<script src="navbar.js"></script>
+
+<script src="cartfunctions.js"></script>
 
 </body>
 </html>
