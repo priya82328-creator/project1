@@ -1,54 +1,101 @@
-
-
+// ===============================
+// Get Current User
+// ===============================
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
 const loginLink = document.getElementById("loginLink");
 const cartLink = document.getElementById("cartLink");
 const logoutLink = document.getElementById("logoutLink");
+const cartCount = document.getElementById("cartCount");
 
-if(currentUser){
+// ===============================
+// Show / Hide Navbar Links
+// ===============================
+if (loginLink && cartLink && logoutLink) {
 
-    loginLink.style.display = "none";
-
-    cartLink.style.display = "inline";
-
-    logoutLink.style.display = "inline";
-
-}else{
-
-    loginLink.style.display = "inline";
-
-    cartLink.style.display = "none";
-
-    logoutLink.style.display = "none";
+    if (currentUser) {
+        loginLink.style.display = "none";
+        cartLink.style.display = "inline";
+        logoutLink.style.display = "inline";
+    } else {
+        loginLink.style.display = "inline";
+        cartLink.style.display = "none";
+        logoutLink.style.display = "none";
+    }
 
 }
 
-
-
+// ===============================
+// Update Cart Count
+// ===============================
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 let count = 0;
 
-cart.forEach(function(item){
-
+cart.forEach(function (item) {
     count += item.quantity;
-
 });
 
-document.getElementById("cartCount").innerHTML = count;
+if (cartCount) {
+    cartCount.textContent = count;
+}
 
+// ===============================
+// Logout Popup
+// ===============================
+const modal = document.getElementById("logoutModal");
+const confirmBtn = document.getElementById("confirmLogout");
+const cancelBtn = document.getElementById("cancelLogout");
 
-// Logout
+// Open Popup
+if (logoutLink && modal) {
 
-logoutLink.addEventListener("click",function(){
+    logoutLink.addEventListener("click", function (e) {
 
-    if(confirm("Are you sure you want to logout?")){
+        e.preventDefault();
 
-        localStorage.removeItem("currentUser");
+        modal.style.display = "flex";
 
-        window.location.href="login.html";
+    });
 
-    }
+}
+
+// Cancel Logout
+if (cancelBtn) {
+
+    cancelBtn.addEventListener("click", function () {
+
+        modal.style.display = "none";
+
+    });
+
+}
+
+// Confirm Logout
+if (confirmBtn) {
+confirmBtn.addEventListener("click", function () {
+
+   
+
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("loggedIn");
+
+    window.location.href = "home.html";
 
 });
+}
+
+// Close Popup When Clicking Outside
+if (modal) {
+
+    window.addEventListener("click", function (e) {
+
+        if (e.target === modal) {
+
+            modal.style.display = "none";
+
+        }
+
+    });
+
+}

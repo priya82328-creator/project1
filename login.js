@@ -1,185 +1,160 @@
+console.log("login.js loaded");
 
 
 const passwordInput = document.getElementById("password");
 const togglePassword = document.getElementById("togglePassword");
-
-
-togglePassword.addEventListener("click", function () {
-
-    if (passwordInput.type === "password") {
-
-        passwordInput.type = "text";
-
-        togglePassword.classList.remove("fa-eye");
-        togglePassword.classList.add("fa-eye-slash");
-
-    } else {
-
-        passwordInput.type = "password";
-
-        togglePassword.classList.remove("fa-eye-slash");
-        togglePassword.classList.add("fa-eye");
-
-    }
-
-});
-
-
-
-
-
-
 const loginForm = document.getElementById("loginForm");
+const message = document.getElementById("message");
 
 
-loginForm.addEventListener("submit", function (e) {
+// ===============================
+// Show / Hide Password
+// ===============================
+if (togglePassword && passwordInput) {
 
-    e.preventDefault();
+    togglePassword.addEventListener("click", function () {
 
+        if (passwordInput.type === "password") {
 
-    const username = document.getElementById("username").value.trim();
+            passwordInput.type = "text";
+            togglePassword.classList.replace("fa-eye", "fa-eye-slash");
 
-    const password = passwordInput.value.trim();
+        } else {
 
+            passwordInput.type = "password";
+            togglePassword.classList.replace("fa-eye-slash", "fa-eye");
 
-
-    if (username === "") {
-
-        alert("Please enter your username.");
-        return;
-
-    }
-
-
-    if (password === "") {
-
-        alert("Please enter your password.");
-        return;
-
-    }
-
-
-
-
-   
-
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-
-
-
-   
-
-    const user = users.find(function(item){
-
-        return item.username === username &&
-               item.password === password;
+        }
 
     });
-
-
-
-    if(user){
-
-
-      
-
-        localStorage.setItem(
-            "currentUser",
-            JSON.stringify(user)
-        );
-
-
-        localStorage.setItem(
-            "loggedIn",
-            "true"
-        );
-
-
-
-        alert("Login Successful!");
-
-        window.location.href = "home.html";
-
-
-    }
-
-    else{
-
-
-        alert("Invalid Username or Password.");
-
-    }
-
-
-
-});
-
-
-
-
-
-
-
-window.onload = function(){
-
-
-    let user = JSON.parse(
-        localStorage.getItem("currentUser")
-    );
-
-
-    if(user && document.getElementById("profileBox")){
-
-
-        document.querySelector(".login-box").style.display="none";
-
-
-        document.getElementById("profileBox").style.display="block";
-
-
-
-        document.getElementById("profileName").innerHTML =
-        user.username;
-
-
-
-        document.getElementById("profileEmail").innerHTML =
-        user.email || "Not Available";
-
-
-
-        document.getElementById("profileContact").innerHTML =
-        user.contact || "Not Available";
-
-
-    }
-
-
-};
-
-
-
-
-
-
-function logout(){
-
-
-    localStorage.removeItem("currentUser");
-
-    localStorage.removeItem("loggedIn");
-
-    document.getElementById("profileBox").style.display="none";
-
-    document.querySelector(".login-box").style.display="block";
-
 
 }
 
 
-window.onload = function(){
+// ===============================
+// Login
+// ===============================
+if (loginForm) {
 
-    let user = JSON.parse(localStorage.getItem("currentUser"));
+    loginForm.addEventListener("submit", function (e) {
+
+        e.preventDefault();
+
+
+        message.textContent = "";
+        message.className = "message";
+
+
+        const username = document.getElementById("username").value.trim();
+        const password = passwordInput.value.trim();
+
+
+
+        // Validation
+        if (username === "") {
+
+            message.textContent = "❌ Please enter your username.";
+            message.classList.add("error");
+            return;
+
+        }
+
+
+        if (password === "") {
+
+            message.textContent = "❌ Please enter your password.";
+            message.classList.add("error");
+            return;
+
+        }
+
+
+
+        // Get users
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+
+
+
+        // Find user
+        const user = users.find(function(item){
+
+            return item.username === username &&
+                   item.password === password;
+
+        });
+
+
+
+        if(user){
+
+
+            // Save session
+            localStorage.setItem(
+                "currentUser",
+                JSON.stringify(user)
+            );
+
+
+            localStorage.setItem(
+                "loggedIn",
+                "true"
+            );
+
+
+
+            // Show success message
+            message.textContent = "✅ Login successful!";
+            message.className = "message success";
+
+
+
+            // Redirect after 2 seconds
+            setTimeout(function(){
+
+                message.textContent = "";
+                message.className = "message";
+
+                window.location.href = "home.html";
+
+            },2000);
+
+
+
+        }
+
+        else{
+
+            message.textContent = "❌ Invalid username or password.";
+            message.className = "message error";
+
+        }
+
+
+    });
+
+}
+
+
+
+
+// ===============================
+// Load User Profile
+// ===============================
+window.addEventListener("load", function(){
+
+
+    // Clear old messages
+    if(message){
+
+        message.textContent = "";
+        message.className = "message";
+
+    }
+
+
+
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+
 
 
     if(user && document.getElementById("profileBox")){
@@ -191,36 +166,22 @@ window.onload = function(){
         document.getElementById("profileBox").style.display = "block";
 
 
-        document.getElementById("profileName").innerHTML =
-        user.username;
+
+        document.getElementById("profileName").textContent =
+        user.fullname || user.username;
 
 
-        document.getElementById("profileEmail").innerHTML =
+
+        document.getElementById("profileEmail").textContent =
         user.email || "Not Available";
 
 
-        document.getElementById("profileContact").innerHTML =
-        user.contact || "Not Available";
+
+        document.getElementById("profileContact").textContent =
+        user.phone || "Not Available";
 
 
     }
 
-};
 
-
-
-
-
-function logout(){
-
-    localStorage.removeItem("currentUser");
-
-    localStorage.removeItem("loggedIn");
-
-
-    document.getElementById("profileBox").style.display="none";
-
-
-    document.querySelector(".login-box").style.display="block";
-
-}
+});
