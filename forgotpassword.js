@@ -1,9 +1,12 @@
-
 const newPassword = document.getElementById("newPassword");
 const confirmPassword = document.getElementById("confirmPassword");
 
 const toggleNewPassword = document.getElementById("toggleNewPassword");
 const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+
+// ================================
+// Show / Hide Password
+// ================================
 
 toggleNewPassword.addEventListener("click", function () {
 
@@ -84,7 +87,18 @@ forgotForm.addEventListener("submit", function(e){
 
     localStorage.setItem("users", JSON.stringify(users));
 
-    alert("Password changed successfully!");
+    // Show Success Popup
+    document.getElementById("successModal").style.display = "flex";
+
+});
+
+// ================================
+// Popup OK Button
+// ================================
+
+document.getElementById("okBtn").addEventListener("click", function(){
+
+    document.getElementById("successModal").style.display = "none";
 
     window.location.href = "login.html";
 

@@ -28,23 +28,17 @@ function displayCart(){
 
     if(cartItems){
 
-
         if(cart.length === 0){
 
-
             cartItems.innerHTML = `
-
                 <p>
                     Your cart is empty.
                 </p>
-
             `;
-
 
         }
 
         else{
-
 
             cartItems.innerHTML = "";
 
@@ -71,15 +65,14 @@ function displayCart(){
                     </p>
 
 
-                    <button onclick="removeItem(${index})">
+                    <button class="remove-btn" onclick="removeItem(${index})">
 
-                        Remove
+                        🗑 Remove
 
                     </button>
 
 
                 </div>
-
 
                 `;
 
@@ -89,9 +82,7 @@ function displayCart(){
 
             });
 
-
         }
-
 
     }
 
@@ -106,6 +97,7 @@ function displayCart(){
     }
 
 
+
     // Update Cart Count
 
     if(cartCount){
@@ -114,8 +106,9 @@ function displayCart(){
 
     }
 
-
 }
+
+
 
 // ===============================
 // Remove Item From Cart
@@ -124,24 +117,42 @@ function displayCart(){
 function removeItem(index){
 
 
-    cart.splice(index,1);
+    if(cart[index].quantity > 1){
 
+        cart[index].quantity--;
+
+    }
+
+    else{
+
+        cart.splice(index,1);
+
+    }
 
 
     localStorage.setItem(
-
         "cart",
-
         JSON.stringify(cart)
-
     );
-
 
 
     displayCart();
 
+}
+
+
+
+// ===============================
+// Go To Checkout
+// ===============================
+
+function goCheckout(){
+
+    window.location.href = "checkout.html";
 
 }
+
+
 
 // ===============================
 // Load Cart When Page Opens
