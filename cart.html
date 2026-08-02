@@ -16,7 +16,7 @@
 <body>
 
 
-<!-- Navigation Bar -->
+<!-- ================= Navigation Bar ================= -->
 
 <nav>
 
@@ -44,12 +44,12 @@
         Logout
     </a>
 
-
 </nav>
 
 
 
-<!-- Cart Section -->
+
+<!-- ================= Cart Section ================= -->
 
 <div class="cart-container">
 
@@ -61,8 +61,6 @@
 
 
     <div id="cartItems">
-
-        <!-- Cart items will be displayed here -->
 
     </div>
 
@@ -78,9 +76,7 @@
 
 
 
-
     <br>
-
 
 
 
@@ -93,17 +89,99 @@
     </button>
 
 
+</div>
+
+<div class="modal" id="logoutModal">
+
+    <div class="modal-content">
+
+        <h2>Logout</h2>
+
+        <p>Are you sure you want to logout?</p>
+
+
+        <div class="modal-buttons">
+
+            <button class="cancel-btn" id="cancelLogout">
+                Cancel
+            </button>
+
+            <button class="logout-btn" id="confirmLogout">
+                Logout
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
 
 
+<!-- ================= JavaScript ================= -->
 
-<script src="script.js"></script>
 
 <script src="cart.js"></script>
 
 
+
+<script>
+// ================= Logout Popup =================
+
+const logoutLink = document.getElementById("logoutLink");
+
+const modal = document.getElementById("logoutModal");
+
+const confirmLogout = document.getElementById("confirmLogout");
+
+const cancelLogout = document.getElementById("cancelLogout");
+
+
+// Open popup
+
+logoutLink.addEventListener("click", function(e){
+
+    e.preventDefault();
+
+    modal.style.display="flex";
+
+});
+
+
+// Confirm logout
+
+confirmLogout.addEventListener("click", function(){
+
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("loggedIn");
+
+    window.location.href="home.html";
+
+});
+
+
+// Cancel logout
+
+cancelLogout.addEventListener("click", function(){
+
+    modal.style.display="none";
+
+});
+
+
+// Click outside popup closes it
+
+window.addEventListener("click", function(e){
+
+    if(e.target === modal){
+
+        modal.style.display="none";
+
+    }
+
+});
+
+</script>
 
 </body>
 
