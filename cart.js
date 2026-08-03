@@ -1,161 +1,108 @@
 console.log("cart.js loaded");
 
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
-// ===============================
-// Get Cart Data
-// ===============================
-
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-
-const cartItems = document.getElementById("cartItems");
-const totalPrice = document.getElementById("totalPrice");
-const cartCount = document.getElementById("cartCount");
-
-
-let total = 0;
-
-
-
-// ===============================
-// Display Cart Items
-// ===============================
+const cartItems=document.getElementById("cartItems");
+const totalPrice=document.getElementById("totalPrice");
+const cartCount=document.getElementById("cartCount");
 
 function displayCart(){
 
-    total = 0;
+let total=0;
 
+const emptyCart=document.getElementById("emptyCart");
+const orderBtn=document.querySelector(".order-btn");
+const totalSection=document.querySelector(".total");
 
-    if(cartItems){
+if(cart.length===0){
 
-        if(cart.length === 0){
+cartItems.style.display="none";
+emptyCart.style.display="flex";
+orderBtn.style.display="none";
+totalSection.style.display="none";
 
-            cartItems.innerHTML = `
-                <p>
-                    Your cart is empty.
-                </p>
-            `;
+if(cartCount){
+cartCount.innerText="0";
+}
 
-        }
-
-        else{
-
-            cartItems.innerHTML = "";
-
-
-            cart.forEach((item,index)=>{
-
-
-                cartItems.innerHTML += `
-
-                <div class="cart-item">
-
-                    <h3>
-                        ${item.name}
-                    </h3>
-
-
-                    <p>
-                        Price: Rs. ${item.price}
-                    </p>
-
-
-                    <p>
-                        Quantity: ${item.quantity || 1}
-                    </p>
-
-
-                    <button class="remove-btn" onclick="removeItem(${index})">
-
-                        🗑 Remove
-
-                    </button>
-
-
-                </div>
-
-                `;
-
-
-                total += Number(item.price) * Number(item.quantity || 1);
-
-
-            });
-
-        }
-
-    }
-
-
-
-    // Update Total Price
-
-    if(totalPrice){
-
-        totalPrice.innerHTML = total;
-
-    }
-
-
-
-    // Update Cart Count
-
-    if(cartCount){
-
-        cartCount.innerHTML = cart.length;
-
-    }
+return;
 
 }
 
+cartItems.style.display="block";
+emptyCart.style.display="none";
+orderBtn.style.display="inline-block";
+totalSection.style.display="block";
 
+cartItems.innerHTML="";
 
-// ===============================
-// Remove Item From Cart
-// ===============================
+cart.forEach((item,index)=>{
+
+let quantity=item.quantity||1;
+let price=Number(item.price)*quantity;
+
+total+=price;
+
+cartItems.innerHTML+=`
+
+<div class="cart-item">
+
+<h3>${item.name}</h3>
+
+<p><strong>Price:</strong> Rs. ${item.price}</p>
+
+<p><strong>Quantity:</strong> ${quantity}</p>
+
+<p><strong>Subtotal:</strong> Rs. ${price}</p>
+
+<button class="remove-btn" onclick="removeItem(${index})">
+🗑 Remove
+</button>
+
+</div>
+
+`;
+
+});
+
+totalPrice.innerText=total;
+
+if(cartCount){
+cartCount.innerText=cart.length;
+}
+
+}
 
 function removeItem(index){
 
+if(cart[index].quantity>1){
 
-    if(cart[index].quantity > 1){
+cart[index].quantity--;
 
-        cart[index].quantity--;
+}else{
 
-    }
-
-    else{
-
-        cart.splice(index,1);
-
-    }
-
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
-
-
-    displayCart();
+cart.splice(index,1);
 
 }
 
+localStorage.setItem("cart",JSON.stringify(cart));
 
+displayCart();
 
-// ===============================
-// Go To Checkout
-// ===============================
+}
 
 function goCheckout(){
 
-    window.location.href = "checkout.html";
+if(cart.length===0){
+
+alert("Your cart is empty.");
+
+return;
 
 }
 
+window.location.href="checkout.html";
 
-
-// ===============================
-// Load Cart When Page Opens
-// ===============================
+}
 
 displayCart();

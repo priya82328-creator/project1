@@ -3,228 +3,293 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Cart - Pharmacy Web System</title>
+<title>My Cart - Pharmacy Web System</title>
 
-    <link rel="stylesheet" href="style.css">
- <style>
- /* ================= Remove Button ================= */
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+background:#eef6ff;
+font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+}
+
+.cart-container{
+max-width:900px;
+margin:50px auto;
+padding:20px;
+}
+
+.cart-container h1{
+color:#1E3A8A;
+margin-bottom:30px;
+}
+
+#cartItems{
+margin-bottom:30px;
+}
+
+.total{
+text-align:right;
+font-size:32px;
+color:#1E3A8A;
+margin-top:30px;
+}
+
+.order-btn{
+background:#1E3A8A;
+color:white;
+border:none;
+padding:14px 35px;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+.order-btn:hover{
+background:#2563eb;
+transform:translateY(-2px);
+}
 
 .remove-btn{
-
-    background:#e63946;
-    color:white;
-    border:none;
-    padding:10px 18px;
-    border-radius:8px;
-    font-size:15px;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.3s;
-    margin-top:10px;
-
+background:#e63946;
+color:white;
+border:none;
+padding:10px 18px;
+border-radius:8px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+margin-top:10px;
 }
 
 .remove-btn:hover{
-
-    background:#c1121f;
-    transform:translateY(-2px);
-
-}
-/* ================= Order Now Button ================= */
-
-.order-btn{
-
-    background:#1E3A8A !important;
-    color:white !important;
-
-    border:none !important;
-    padding:14px 35px !important;
-
-    border-radius:10px !important;
-
-    font-size:18px !important;
-    font-weight:600 !important;
-
-    cursor:pointer !important;
-
-    transition:0.3s;
-
-    display:inline-block;
-
+background:#c1121f;
 }
 
-
-.order-btn:hover{
-
-    background:#3B82F6 !important;
-    transform:translateY(-2px);
-
+.empty-cart{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:white;
+padding:60px 40px;
+border-radius:18px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+margin-top:30px;
 }
 
-
-.order-btn:active{
-
-    transform:scale(0.95);
-
+.empty-icon{
+font-size:80px;
+margin-bottom:20px;
 }
+
+.empty-cart h2{
+font-size:35px;
+color:#1E3A8A;
+margin-bottom:10px;
+}
+
+.empty-cart p{
+font-size:18px;
+color:#666;
+margin-bottom:30px;
+}
+
+.shop-btn{
+display:inline-block;
+background:#1E3A8A;
+color:white;
+text-decoration:none;
+padding:14px 35px;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+transition:.3s;
+}
+
+.shop-btn:hover{
+background:#2563eb;
+transform:translateY(-2px);
+}.cart-item{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+
+.cart-item h3{
+color:#1E3A8A;
+margin-bottom:10px;
+}
+
+.cart-item p{
+margin:8px 0;
+font-size:17px;
+}
+
+.modal{
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.5);
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.modal-content{
+background:white;
+padding:30px;
+border-radius:12px;
+text-align:center;
+width:350px;
+}
+
+.modal-buttons{
+margin-top:25px;
+display:flex;
+justify-content:center;
+gap:15px;
+}
+
+.cancel-btn,.logout-btn{
+padding:10px 22px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+font-weight:bold;
+}
+
+.cancel-btn{
+background:#ddd;
+}
+
+.logout-btn{
+background:#e63946;
+color:white;
+}
+
 </style>
-</head>
 
+</head>
 
 <body>
 
-
-<!-- ================= Navigation Bar ================= -->
-
 <nav>
 
-    <a href="home.html">
-        Home
-    </a>
+<a href="home.html">Home</a>
 
+<a href="search.html">Explore</a>
 
-    <a href="search.html">
-        Explore
-    </a>
+<a href="cart.html">
+Cart (<span id="cartCount">0</span>)
+</a>
 
+<a href="contact.html">Contact Us</a>
 
-    <a href="cart.html">
-        Cart (<span id="cartCount">0</span>)
-    </a>
-
-
-    <a href="contact.html">
-        Contact Us
-    </a>
-
-
-    <a href="#" id="logoutLink">
-        Logout
-    </a>
+<a href="#" id="logoutLink">Logout</a>
 
 </nav>
 
-<!-- ================= Cart Section ================= -->
-
 <div class="cart-container">
 
+<h1>My Cart</h1>
 
-    <h1 style="margin-bottom:25px; color:#1E3A8A;">
-        My Cart
-    </h1>
+<div id="cartItems"></div>
 
-    <div id="cartItems">
+<div id="emptyCart" class="empty-cart" style="display:none;">
 
-    </div>
+<div class="empty-icon">🛒</div>
 
+<h2>Your Cart is Empty</h2>
 
-    <h2 class="total">
+<p>Looks like you haven't added any medicines yet.</p>
 
-        Total : Rs.
-        <span id="totalPrice">0</span>
+<a href="search.html" class="shop-btn">
+Browse Medicines
+</a>
 
-    </h2>
+</div>
 
+<h2 class="total">
+Total : Rs. <span id="totalPrice">0</span>
+</h2>
 
+<br>
 
-    <br>
-    <button class="order-btn"  onclick="goCheckout()">
-          Order Now
-    </button>
+<button class="order-btn" onclick="goCheckout()">
+Order Now
+</button>
 
 </div>
 
 <div class="modal" id="logoutModal">
 
-    <div class="modal-content">
+<div class="modal-content">
 
-        <h2>Logout</h2>
+<h2>Logout</h2>
 
-        <p>Are you sure you want to logout?</p>
+<p>Are you sure you want to logout?</p>
 
+<div class="modal-buttons">
 
-        <div class="modal-buttons">
+<button class="cancel-btn" id="cancelLogout">
+Cancel
+</button>
 
-            <button class="cancel-btn" id="cancelLogout">
-                Cancel
-            </button>
-
-            <button class="logout-btn" id="confirmLogout">
-                Logout
-            </button>
-
-        </div>
-
-    </div>
+<button class="logout-btn" id="confirmLogout">
+Logout
+</button>
 
 </div>
 
+</div>
 
-
-<!-- ================= JavaScript ================= -->
-
+</div>
 
 <script src="cart.js"></script>
 
-
-
 <script>
-// ================= Logout Popup =================
 
-const logoutLink = document.getElementById("logoutLink");
+const logoutLink=document.getElementById("logoutLink");
+const modal=document.getElementById("logoutModal");
+const confirmLogout=document.getElementById("confirmLogout");
+const cancelLogout=document.getElementById("cancelLogout");
 
-const modal = document.getElementById("logoutModal");
-
-const confirmLogout = document.getElementById("confirmLogout");
-
-const cancelLogout = document.getElementById("cancelLogout");
-
-
-// Open popup
-
-logoutLink.addEventListener("click", function(e){
-
-    e.preventDefault();
-
-    modal.style.display="flex";
-
+logoutLink.addEventListener("click",function(e){
+e.preventDefault();
+modal.style.display="flex";
 });
 
-
-// Confirm logout
-
-confirmLogout.addEventListener("click", function(){
-
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("loggedIn");
-
-    window.location.href="home.html";
-
+confirmLogout.addEventListener("click",function(){
+localStorage.removeItem("currentUser");
+localStorage.removeItem("loggedIn");
+window.location.href="home.html";
 });
 
-
-// Cancel logout
-
-cancelLogout.addEventListener("click", function(){
-
-    modal.style.display="none";
-
+cancelLogout.addEventListener("click",function(){
+modal.style.display="none";
 });
 
-
-// Click outside popup closes it
-
-window.addEventListener("click", function(e){
-
-    if(e.target === modal){
-
-        modal.style.display="none";
-
-    }
-
+window.addEventListener("click",function(e){
+if(e.target===modal){
+modal.style.display="none";
+}
 });
 
 </script>
